@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const path = require('path');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -29,13 +30,24 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/test', testRoutes);
 
-// Root route for health check
-app.get('/', (req, res) => {
-  res.status(200).json({ 
-    message: 'API is running',
-    environment: process.env.NODE_ENV || 'development'
+// Static files for production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  
+  // Any route that is not an API route will be directed to the React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
   });
-});
+} else {
+  // Root route for health check in development
+  app.get('/', (req, res) => {
+    res.status(200).json({ 
+      message: 'API is running',
+      environment: process.env.NODE_ENV || 'development'
+    });
+  });
+}
 
 // Error handler middleware
 app.use(errorHandler);
