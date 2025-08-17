@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../hooks/useAuth';
 import { useTasks } from '../hooks/useTasks';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import AddTaskForm from '../components/tasks/AddTaskForm';
 import EditTaskForm from '../components/tasks/EditTaskForm';
 import FilterBar from '../components/tasks/FilterBar';
@@ -16,7 +14,6 @@ const Dashboard = () => {
   const { user } = useAuth();
   const {
     tasks,
-    allTasks,
     loading,
     filters,
     addTask,
@@ -31,7 +28,6 @@ const Dashboard = () => {
   
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
-  const [offlineTasks, setOfflineTasks] = useLocalStorage('offlineTasks', []);
   
   const stats = getTaskStats();
   

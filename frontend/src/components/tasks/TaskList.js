@@ -12,7 +12,7 @@ const TaskList = ({
   onToggleComplete, 
   onReorder 
 }) => {
-  const [draggingId, setDraggingId] = useState(null);
+  const [, setDraggingId] = useState(null);
   
   const handleDragStart = (start) => {
     setDraggingId(start.draggableId);

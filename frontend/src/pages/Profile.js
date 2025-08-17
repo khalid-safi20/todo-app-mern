@@ -11,7 +11,7 @@ import {
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { updateDetails, updatePassword } from '../redux/slices/authSlice';
-import { setTheme, toggleTheme } from '../redux/slices/themeSlice';
+import { setTheme } from '../redux/slices/themeSlice';
 
 const Profile = () => {
   const dispatch = useDispatch();

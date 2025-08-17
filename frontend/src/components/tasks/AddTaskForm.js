@@ -4,8 +4,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import Input from '../ui/Input';
 import Select from '../ui/Select';
 import Button from '../ui/Button';
-import { formatDateForInput } from '../../utils/helpers';
-
 const AddTaskForm = ({ onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     title: '',
